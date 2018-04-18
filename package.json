@@ -1,0 +1,33 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "packager-win": "electron-packager ./ todo --platform=win32 --out ./todo --version 1.0.0 --arch=x64 --overwrite --icon=./images/favicon.ico",
+    "packager-mac": "electron-packager ./ todo --win --out ./todo --version 1.0.0 --arch=x64 --overwrite --icon=./images/favicon.ico",
+    "packager-all": "electron-packager ./ todo --platform=all --out ./todo --version 1.0.0 --arch=x64 --overwrite --icon=./images/favicon.ico"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "private": true,
+  "dependencies": {
+    "director": "^1.2.0",
+    "vue": "^2.1.8",
+    "todomvc-common": "^1.0.1",
+    "todomvc-app-css": "^2.0.0"
+  },
+  "author": "chuxu",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.8.4",
+    "electron-packager": "^12.0.1"
+  }
+}

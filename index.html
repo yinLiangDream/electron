@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-framework="vue">
+<head>
+    <meta charset="utf-8">
+    <title>待办事项</title>
+    <link rel="stylesheet" href="node_modules/todomvc-common/base.css">
+    <link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+    <style> [v-cloak] { display: none; } </style>
+</head>
+<body>
+<section class="todoapp" v-cloak>
+    <header class="header">
+        <h1>待办事项</h1>
+        <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo" @keyup.enter="addTodo">
+    </header>
+    <section class="main" v-show="todos.length">
+        <input id="toggle-all" class="toggle-all" type="checkbox" v-model="allDone">
+        <label for="toggle-all">标记所有完成</label>
+        <ul class="todo-list">
+            <li class="todo" v-for="todo in filteredTodos" :key="todo.id" :class="{completed: todo.completed, editing: todo == editedTodo}">
+                <div class="view">
+                    <input class="toggle" type="checkbox" v-model="todo.completed">
+                    <label @dblclick="editTodo(todo)">{{todo.title}}</label>
+                    <button class="destroy" @click="removeTodo(todo)"></button>
+                </div>
+                <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)">
+            </li>
+        </ul>
+    </section>
+    <footer class="footer" v-show="todos.length">
+				<span class="todo-count">
+					{{pluralize('项', remaining)}}
+				</span>
+        <ul class="filters">
+            <li><a href="#/all" :class="{selected: visibility == 'all'}">全部</a></li>
+            <li><a href="#/active" :class="{selected: visibility == 'active'}">未完成</a></li>
+            <li><a href="#/completed" :class="{selected: visibility == 'completed'}">已完成</a></li>
+        </ul>
+        <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
+            清除已完成
+        </button>
+    </footer>
+</section>
+<footer class="info">
+    <p>待办事项</p>
+    <p>Created by chuxu</p>
+    <p>版权所有，盗版不究</p>
+</footer>
+
+<script src="node_modules/todomvc-common/base.js"></script>
+<script src="node_modules/director/build/director.js"></script>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="js/store.js"></script>
+<script src="js/app.js"></script>
+<script src="js/routes.js"></script>
+<!-- jsx is an optional syntactic sugar that transforms methods in React's
+    `render` into an HTML-looking format. Since the two models above are
+    unrelated to React, we didn't need those transforms. -->
+<script type="text/jsx" src="js/todoItem.jsx"></script>
+<script type="text/jsx" src="js/footer.jsx"></script>
+<script type="text/jsx" src="js/app.jsx"></script>
+
+<script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+</script>
+</body>
+</html>
